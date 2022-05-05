@@ -7,11 +7,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "pinia": "^2.0.13",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.3",
-    "vuex": "^4.0.0"
+    "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.15.1",
