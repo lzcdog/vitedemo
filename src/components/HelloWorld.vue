@@ -1,56 +1,31 @@
-<script setup lang="ts">
-import { ref, defineProps } from 'vue';
-
-defineProps<{ msg: string }>();
-const count = ref(0);
-</script>
-
 <template>
-  <h1>{{ msg }}</h1>
-  <div class="ss">
-    <div class="d">dddd</div>
-  </div>
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank"> Vite Docs </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <div @click="css">{{ width + a.name }}</div>
 </template>
-
-<style scoped lang="less">
-.ss {
-  .d {
-    color: red;
+<script setup lang="ts">
+import { defineProps, withDefaults, defineExpose, ref, reactive, toRefs, defineEmits } from 'vue';
+const emit = defineEmits<{
+  (event: 'helloWorldClick', data: number): void;
+}>();
+withDefaults(
+  defineProps<{
+    width?: string;
+    height?: string;
+  }>(),
+  {
+    width: '100'
   }
-}
-a {
-  color: #42b983;
-}
-
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
-</style>
+);
+const a = reactive({
+  name: '1'
+});
+const css = () => {
+  emit('helloWorldClick', 1234);
+};
+defineExpose({
+  ...toRefs(a),
+  changeName() {
+    a.name = 'b';
+  }
+});
+</script>
+<style scoped></style>
